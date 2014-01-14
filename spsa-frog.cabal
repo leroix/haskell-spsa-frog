@@ -49,7 +49,7 @@ flag developer
 
 library
   default-language: Haskell2010
-  exposed-modules:  Math.FROG.Retrieval
+  exposed-modules:  Math.FROG.Retrieval, Math.FROG.Tools
   other-modules:      
   hs-source-dirs:   src
 

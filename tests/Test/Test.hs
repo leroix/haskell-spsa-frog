@@ -15,7 +15,16 @@ import Math.FROG.Retrieval (retrieve)
 --import Test.Types
 
 
-gen
+
+-----------------
+---- List of Tests
+-----------------
+
+tests :: [Test]
+tests = 
+[
+]
+
 
 -- convenient whilst in ghci
 runAllTests :: IO ()

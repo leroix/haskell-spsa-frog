@@ -1,4 +1,4 @@
-module Math.FROG.Tools where
+module Math.FROG.Tools
 ( mkTrace
 
 , mkPGgate
@@ -10,32 +10,39 @@ module Math.FROG.Tools where
 , mkSHGfield
 , mkSDfield
 , mkTHGfield
+
+, shift
 ) where
 
 import qualified Numeric.LinearAlgebra as LA
 import qualified Numeric.GSL.Fourier as F
+import qualified Foreign
 
 type ComplexSignal = LA.Vector (LA.Complex Double)
 type Trace = LA.Matrix Double
 type SignalIntensity = LA.Vector Double
 
-mkTrace :: ComplexSignal -> LA.Vector a -> Trace
-mkTrace field gate = LA.fromColums $ map atEachDelayDo [upper,upper-1..lower]
+mkTrace :: ComplexSignal -> ComplexSignal -> Trace
+mkTrace field gate = LA.fromColumns $ map atEachDelayApply [upper,upper-1..lower]
     where
-    atEachDelayDo = (**2) . LA.magnitude . F.fft . (*field) . (shift gate)
+    atEachDelayApply = (^2) . (LA.mapVector LA.magnitude) 
+                             . (flip shift upper) 
+                             .  F.fft 
+                             . (*field) 
+                             . (shift gate)
     sz = LA.dim field
     upper = (divideInt sz 2)
     lower = (-1) * (divideInt sz 2) + 1
 
 
-mkPGgate :: ComplexSignal -> SignalIntensity
-mkPGgate = LA.mapVector ((**2) . LA.magnitude)
+mkPGgate :: ComplexSignal -> ComplexSignal
+mkPGgate = LA.mapVector ((**2) . abs)
 
 mkSHGgate :: ComplexSignal -> ComplexSignal
 mkSHGgate = id
 
 mkSDgate :: ComplexSignal -> ComplexSignal
-mkSDgate = LA.mapVector C.conjugate
+mkSDgate = LA.mapVector LA.conjugate
 
 mkTHGgate :: ComplexSignal -> ComplexSignal
 mkTHGgate = id
@@ -54,7 +61,7 @@ mkTHGfield :: ComplexSignal -> ComplexSignal
 mkTHGfield = LA.mapVector (**2)
 
 
-shift :: LA.Vector a -> Int -> LA.Vector a
+shift :: ComplexSignal -> Int -> ComplexSignal
 shift gate delay = LA.buildVector sz (builder delay)
     where
     sz = LA.dim gate
