@@ -54,7 +54,8 @@ library
   hs-source-dirs:   src
 
   build-depends:    base >=4 && < 5,
-                    random, hmatrix >= 0.15
+                    random, hmatrix >= 0.15,
+                    spsa >=0.1.1.0
   default-extensions:       GeneralizedNewtypeDeriving
 
   if flag(developer)
