@@ -15,7 +15,7 @@ retrieve nonlin measurement = do
     let (gainA, gainC) = SPSA.semiautomaticTuning 0.0001 0.05
     let lossFn = calcLoss nonlin measurement
 
-    spsa <- SPSA.mkUnconstrainedSPSA lossFn gainA gainC sz
+    spsa <- SPSA.mkUnconstrainedSPSA lossFn gainA gainC (2*sz)
     initialGuess <- FR.mkInitialGuess sz
 
     return $ SPSA.optimize spsa 1000 initialGuess
