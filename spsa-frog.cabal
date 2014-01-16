@@ -60,10 +60,11 @@ library
 
   if flag(developer)
     hs-source-dirs: tests
-    other-modules:  Test.Test, Test.Types
+    other-modules:  Test.Test    
     build-depends:  test-framework >= 0.2.0,
                     test-framework-quickcheck2 >= 0.2.0, QuickCheck >= 2,
-                    test-framework-hunit >= 0.2.0, HUnit >= 1.2 && < 2
+                    test-framework-hunit >= 0.2.0, HUnit >= 1.2 && < 2,
+                    plot-gtk
 
 source-repository head
   type:     git

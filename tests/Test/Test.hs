@@ -22,8 +22,8 @@ import Math.FROG.Retrieval (retrieve)
 
 tests :: [Test]
 tests = 
-[
-]
+    [
+    ]
 
 
 -- convenient whilst in ghci
