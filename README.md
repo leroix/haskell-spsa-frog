@@ -39,7 +39,7 @@ cabal-dev build
 ```
 
 Refer to the tests to see how the functions in Math.FROG.Retrieval are used. It will be helpful
-to understand the (Haskell SPSA module)[http://hackage.haskell.org/package/spsa].
+to understand the [haskell-SPSA module](http://hackage.haskell.org/package/spsa).
 
 
 ### Running Tests
