@@ -38,7 +38,8 @@ cabal-dev configure --enable-tests --enable-benchmarks --flags=developer
 cabal-dev build
 ```
 
-Refer to the tests to see how the functions in Math.FROG.Retrieval are used. It will be helpful
+Refer to the [tests](https://github.com/leroix/haskell-spsa-frog/blob/master/tests/Test/Test.hs) 
+ to see how the functions in Math.FROG.Retrieval are used. It will be helpful
 to understand the [haskell-SPSA module](http://hackage.haskell.org/package/spsa).
 
 
