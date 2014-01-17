@@ -12,11 +12,8 @@ import qualified Numeric.LinearAlgebra as LA
 import qualified Numeric.GSL.Fourier as F
 import qualified Foreign
 
-import Math.FROG.Types (Nonlinearity(..))
+import Math.FROG.Types
 
-
-type ComplexSignal = LA.Vector (LA.Complex Double)
-type Trace = LA.Matrix Double
 
 
 mkTrace :: ComplexSignal -> ComplexSignal -> Trace
@@ -28,8 +25,8 @@ mkTrace field gate = LA.fromColumns $ map atEachDelayApply [upper,upper-1..lower
                             . (*field) 
                             . (shift gate)
     sz = LA.dim field
-    upper = (divideInt sz 2)
-    lower = (-1) * (divideInt sz 2) + 1
+    upper = (sz `quot` 2)
+    lower = (-1) * (sz `quot` 2) + 1
 
 
 mkSigGate :: Nonlinearity -> ComplexSignal -> ComplexSignal -> (ComplexSignal, ComplexSignal)
@@ -57,10 +54,6 @@ mkInitialGuess sz = do
     return $ LA.buildVector (2*sz) (\k -> if k < sz then (randMags !! k) else (randAngs !! k))
 
 
-divideInt :: Int -> Int -> Int
-divideInt n d = truncate ((fromIntegral n) / (fromIntegral d))
-
-
 flatPolar2Complex :: LA.Vector Double -> LA.Vector (LA.Complex Double)
 flatPolar2Complex v = LA.buildVector sz (\k -> LA.mkPolar (mags LA.@> k) (angs LA.@> k))
     where
@@ -74,3 +67,6 @@ center f = shift f $ getDelay . getMaxInd $ f
     sz = LA.dim f
     getMaxInd = LA.maxIndex . (LA.mapVector LA.magnitude)
     getDelay = (*(-1)) . ((-) (sz `quot` 2))
+
+
+

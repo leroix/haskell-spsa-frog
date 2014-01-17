@@ -16,11 +16,29 @@ import Math.FROG.Retrieval
 import Math.FROG.Types
 --import Test.Types
 
+type PulseFn = Double -> Double -> LA.Complex Double
 
-caseGaussianRetrieval :: Int -> IO ()
-caseGaussianRetrieval sz = do
+-----------------
+-- Example Pulses
+-----------------
+singleGaus :: PulseFn
+singleGaus sz k = exp ((-pi) / sz * (k - sz/2.0)^2) LA.:+ 0.0
+
+doubleGaus :: PulseFn
+doubleGaus sz k = (singleGaus sz (k - (sz / 8.0))) + (singleGaus sz (k + (sz / 8.0)))
+
+mkPulse :: PulseFn -> Int -> ComplexSignal
+mkPulse form sz = LA.buildVector sz mkElem
+    where
+    dsz = (fromIntegral sz) :: Double
+    mkElem = form dsz . fromIntegral
+
+
+
+caseRetrieval :: ComplexSignal -> IO ()
+caseRetrieval field = do
+    let sz = LA.dim field
     let dsz = (fromIntegral sz) :: Double
-    let field = LA.buildVector sz (\k -> exp((-pi) / dsz * ((fromIntegral k) - dsz/2.0)^2) LA.:+ 0.0)
     let trc = FR.mkTrace field field
 
     o <- retrieve SHG trc
@@ -43,7 +61,8 @@ caseGaussianRetrieval sz = do
 
 tests :: [Test]
 tests = 
-    [ testGroup "Retrieval" [ testCase "Gaussian Retrieval" $ caseGaussianRetrieval 32
+    [ testGroup "Retrieval" [ testCase "Gaussian" $ caseRetrieval (mkPulse singleGaus 32)
+                            , testCase "Double Gaussian" $ caseRetrieval (mkPulse doubleGaus 32)
                             ]
     ]
 

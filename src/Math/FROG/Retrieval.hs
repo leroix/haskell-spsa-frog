@@ -7,9 +7,10 @@ import qualified Numeric.LinearAlgebra as LA
 import qualified Math.Optimization.SPSA as SPSA
 
 import qualified Math.FROG.Tools as FR
-import Math.FROG.Types (Nonlinearity)
+import Math.FROG.Types 
 
-retrieve :: Nonlinearity -> LA.Matrix Double -> IO (LA.Vector Double)
+
+retrieve :: Nonlinearity -> Trace -> IO (LA.Vector Double)
 retrieve nonlin measurement = do
     let niter = 50000
     let a = 0.2
@@ -28,7 +29,7 @@ retrieve nonlin measurement = do
 
 
 
-calcLoss :: Nonlinearity -> LA.Matrix Double -> LA.Vector Double -> Double
+calcLoss :: Nonlinearity -> Trace -> LA.Vector Double -> Double
 calcLoss nonlin meas v = (/ (fromIntegral $ LA.rows meas)) . sqrt 
                                                            . LA.sumElements $ sqDiff
     where
