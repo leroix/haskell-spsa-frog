@@ -9,9 +9,9 @@ about the pulse to retrieve the pulse signal's amplitude and phase with a few, k
 
 Traditionally, FROG uses a generalized projection-based algorithm to retrieve the amplitude and phase.
 Here, we experiment with replacing that algorithm with Simultaneous Perturbation Stocastic Approximation
- ([SPSA](http://jhuapl.edu/SPSA)). SPSA could be advantageous in FROG for two reasons. It does not 
-require the calculation of gradients making it computationally efficient. Also, it functions very well
-in the presence of noise and errors which are always present in real-world FROG measurements.
+ ([SPSA](http://jhuapl.edu/SPSA)). SPSA has strong theoretical foundations and is very simple to 
+implement compared to the current FROG retrieval algorithm.
+
 
 ## Using SPSA FROG
 Disclaimer: SPSA FROG is still very experimental and needs to be tuned.
