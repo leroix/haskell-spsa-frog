@@ -10,8 +10,7 @@ about the pulse to retrieve the pulse signal's amplitude and phase with a few, k
 Traditionally, FROG uses a generalized projection-based algorithm to retrieve the amplitude and phase.
 Here, we experiment with replacing that algorithm with Simultaneous Perturbation Stocastic Approximation
  ([SPSA](http://jhuapl.edu/SPSA)). SPSA has strong theoretical foundations and is very simple to 
-implement compared to the current FROG retrieval algorithm.
-
+implement.
 
 ## Using SPSA FROG
 Disclaimer: SPSA FROG is still very experimental and needs to be tuned.
@@ -76,3 +75,7 @@ Or you can run a single test
 > runTest "Gaussian" -- follows test patterns in Test.Framework
 > runGroup "Retrieval" -- if you want to run all tests in the "Retrieval" group
 ```
+
+
+## Why Haskell?
+http://www.haskell.org/haskellwiki/Why_Haskell_matters
