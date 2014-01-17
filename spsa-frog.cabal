@@ -21,21 +21,22 @@ flag developer
   description: operate in developer mode
   default: False
 
---test-suite tests
---  default-language: Haskell2010
---  type: exitcode-stdio-1.0
---  main-is:            Main.hs
---  hs-source-dirs:     tests
---  other-modules:      Test.Test, Test.Types
---  ghc-options:        -Wall -threaded -rtsopts -with-rtsopts=-N  
---  build-depends:      base >=4 && < 5,
---                      spsa,
---                      spsa-frog,
---                      random, hmatrix >= 0.15,
---                      test-framework >= 0.2.0,
---                      test-framework-quickcheck2 >= 0.2.0, QuickCheck >= 2,
---                      test-framework-hunit >= 0.2.0, HUnit >= 1.2 && < 2
---  default-extensions:         GeneralizedNewtypeDeriving
+test-suite tests
+  default-language: Haskell2010
+  type: exitcode-stdio-1.0
+  main-is:            Main.hs
+  hs-source-dirs:     tests
+  other-modules:      Test.Test  
+  ghc-options:        -Wall -threaded -rtsopts -with-rtsopts=-N  
+  build-depends:      base >=4 && < 5,
+                      spsa,
+                      spsa-frog,
+                      random, hmatrix >= 0.15,
+                      test-framework >= 0.2.0,
+                      test-framework-quickcheck2 >= 0.2.0, QuickCheck >= 2,
+                      test-framework-hunit >= 0.2.0, HUnit >= 1.2 && < 2,
+                      plot-gtk
+  default-extensions:         GeneralizedNewtypeDeriving
 --
 --benchmark benchmarks
 --  default-language: Haskell2010
@@ -49,7 +50,7 @@ flag developer
 
 library
   default-language: Haskell2010
-  exposed-modules:  Math.FROG.Retrieval, Math.FROG.Tools
+  exposed-modules:  Math.FROG.Retrieval, Math.FROG.Tools, Math.FROG.Types
   other-modules:      
   hs-source-dirs:   src
 

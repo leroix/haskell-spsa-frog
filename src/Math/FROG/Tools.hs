@@ -3,6 +3,8 @@ module Math.FROG.Tools
 , mkSigGate
 , shift
 , mkInitialGuess
+, flatPolar2Complex
+, center
 ) where
 
 import qualified System.Random as R
@@ -57,3 +59,18 @@ mkInitialGuess sz = do
 
 divideInt :: Int -> Int -> Int
 divideInt n d = truncate ((fromIntegral n) / (fromIntegral d))
+
+
+flatPolar2Complex :: LA.Vector Double -> LA.Vector (LA.Complex Double)
+flatPolar2Complex v = LA.buildVector sz (\k -> LA.mkPolar (mags LA.@> k) (angs LA.@> k))
+    where
+    sz = (LA.dim v) `quot` 2
+    mags = LA.subVector 0 sz v
+    angs = LA.subVector sz sz v
+    
+center :: ComplexSignal -> ComplexSignal
+center f = shift f $ getDelay . getMaxInd $ f
+    where
+    sz = LA.dim f
+    getMaxInd = LA.maxIndex . (LA.mapVector LA.magnitude)
+    getDelay = (*(-1)) . ((-) (sz `quot` 2))

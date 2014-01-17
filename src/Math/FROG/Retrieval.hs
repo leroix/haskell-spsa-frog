@@ -11,14 +11,19 @@ import Math.FROG.Types (Nonlinearity)
 
 retrieve :: Nonlinearity -> LA.Matrix Double -> IO (LA.Vector Double)
 retrieve nonlin measurement = do
+    let niter = 50000
+    let a = 0.2
+    let c = 0.00001
+
     let sz = LA.rows measurement
-    let (gainA, gainC) = SPSA.semiautomaticTuning 0.0001 0.05
+    let gainA = SPSA.standardAk a (niter `quot` 10) 0.602
+    let gainC = SPSA.standardCk c 0.101
     let lossFn = calcLoss nonlin measurement
 
     spsa <- SPSA.mkUnconstrainedSPSA lossFn gainA gainC (2*sz)
     initialGuess <- FR.mkInitialGuess sz
 
-    return $ SPSA.optimize spsa 1000 initialGuess
+    return $ SPSA.optimize spsa niter initialGuess
     
 
 
@@ -27,9 +32,6 @@ calcLoss :: Nonlinearity -> LA.Matrix Double -> LA.Vector Double -> Double
 calcLoss nonlin meas v = (/ (fromIntegral $ LA.rows meas)) . sqrt 
                                                            . LA.sumElements $ sqDiff
     where
-    sz = (LA.dim v) `quot` 2
-    mags = LA.subVector 0 sz v
-    angs = LA.subVector sz sz v
-    field = LA.buildVector sz (\k -> (LA.mkPolar (mags LA.@> k) (angs LA.@> k)))
+    field = FR.flatPolar2Complex v
     (signal, gate) = FR.mkSigGate nonlin field field
     sqDiff = (^2) . abs $ (meas - FR.mkTrace signal gate)
