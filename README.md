@@ -4,8 +4,8 @@ In situations where laser pulse-amplitude and -phase variations occur faster tha
 Frequency-Resolved Optical Gating ([FROG](http://frog.gatech.edu/Pubs/Trebino-FROGreview-RSI-1997.pdf)) 
 uses optical nonlinearities
 to mix a laser pulse signal with a modified version of itself. The resulting signal is then 
-spectrally resolved. By recording the spectrum at each delay, FROG gathers enough information
-about the pulse to retrieve the pulse signal's amplitude and phase with a few known ambiguities.
+spectrally-resolved. By recording the spectrum at each delay, FROG gathers enough information
+about the pulse to retrieve the pulse signal's amplitude and phase with a few, known, ambiguities.
 
 Traditionally, FROG uses a generalized projection-based algorithm to retrieve the amplitude and phase.
 Here, we experiment with replacing that algorithm with Simultaneous Perturbation Stocastic Approximation
