@@ -1,7 +1,8 @@
 # SPSA FROG
 
-In situations where fast enough detectors aren't available, Frequency-Resolved Optical Gating 
-([FROG](http://frog.gatech.edu/Pubs/Trebino-FROGreview-RSI-1997.pdf)) uses optical nonlinearities
+In situations where laser pulse-amplitude and -phase variations occur faster than available detectors can measure, 
+Frequency-Resolved Optical Gating ([FROG](http://frog.gatech.edu/Pubs/Trebino-FROGreview-RSI-1997.pdf)) 
+uses optical nonlinearities
 to mix a laser pulse signal with a modified version of itself. The resulting signal is then 
 spectrally resolved. By recording the spectrum at each delay, FROG gathers enough information
 about the pulse to retrieve the pulse signal's amplitude and phase with a few known ambiguities.
