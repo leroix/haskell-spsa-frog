@@ -74,5 +74,5 @@ Or you can run a single test
 
 ```
 > runTest "Gaussian" -- follows test patterns in Test.Framework
-> runGroup 4 -- if you know the group number
+> runGroup "Retrieval" -- if you want to run all tests in the "Retrieval" group
 ```
