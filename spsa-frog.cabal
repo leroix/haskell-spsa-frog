@@ -29,7 +29,7 @@ test-suite tests
   other-modules:      Test.Test  
   ghc-options:        -Wall -threaded -rtsopts -with-rtsopts=-N  
   build-depends:      base >=4 && < 5,
-                      spsa,
+                      spsa >= 0.1 && < 0.2,
                       spsa-frog,
                       random, hmatrix >= 0.15 && < 0.16,
                       test-framework >= 0.2.0,
