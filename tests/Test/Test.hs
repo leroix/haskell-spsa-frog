@@ -9,7 +9,7 @@ import Test.QuickCheck.Monadic (assert, monadicIO, run)
 import Test.HUnit (assertBool)
 
 import qualified Numeric.LinearAlgebra as LA
-import qualified Graphics.Rendering.Plot.HMatrix as G
+--import qualified Graphics.Rendering.Plot.HMatrix as G
 
 import qualified Math.FROG.Tools as FR
 import Math.FROG.Retrieval
@@ -48,11 +48,11 @@ caseRetrieval field = do
 
     putStrLn . show $ calcLoss SHG trc o
 
-    G.mplot [LA.linspace sz (0::Double, dsz-1), mags]
+    --G.mplot [LA.linspace sz (0::Double, dsz-1), mags]
 
-    G.imshow trc
+    --G.imshow trc
 
-    G.imshow (FR.mkTrace rfield rfield)
+    --G.imshow (FR.mkTrace rfield rfield)
 
 
 -----------------
